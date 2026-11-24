@@ -1,0 +1,48 @@
+{
+  "exhibit": "E02",
+  "what": "HouseBets limbo game page: the rules panel text (English) and the constants and functions it is filled from, as shipped in the bundle the live page loads",
+  "source": {
+    "file": "bundles/platform-housegames-limbo-game.js (HouseBets workshop)",
+    "sha256": "7b12dc436331d91610c727905c71f6404b38113ef144da0e6c9c5f829ff92b00",
+    "bytes": 798234,
+    "checkedOnLivePage": "2026-10-10 (bundles/LIVE-BUNDLES.md)"
+  },
+  "rulesPanelEnglish": {
+    "rulesShort": "Rules",
+    "rulesHow": "How to play",
+    "rulesPickTarget": "Pick a target multiplier between {min}× and {max}×. The game draws a result between {rmin}× and {rmax}×.",
+    "rulesWinWhen": "You win when the result is at least your target (compared to the cent). The payout is your stake × target.",
+    "rulesFreeRound": "A 0.00 stake plays a free round — the game runs and no money moves.",
+    "rulesOdds": "Odds and RTP",
+    "rulesChanceFormula": "Win chance = 99 ÷ target, in percent. Example: target 2.00× → 49.50% chance → pays 2× (profit = stake × 1).",
+    "rulesRtpLine": "RTP is 99% at every target; the house edge is 1%.",
+    "rulesCapLine": "The result can reach {cap}×; targets above it cannot be entered.",
+    "rulesLimitsH": "Limits",
+    "rulesBetRange": "Bet from {min} to {max} per round.",
+    "rulesMaxWin": "A round pays at most {cap}. A bet whose win would exceed the cap is refused — not reduced — and the maximum bet for the current multiplier is shown under the amount.",
+    "rulesAutoH": "Auto, Advanced and Instant",
+    "rulesAutoLine": "Auto places a run of bets at your stake, with optional on-win and on-loss increases and stop-on-profit / stop-on-loss limits. Advanced lets a strategy decide each next bet from the last round. Instant runs up to {max} bets back to back and draws a profit line as each one settles. Every stop is checked after each settled bet.",
+    "rulesFairH": "Provably fair",
+    "rulesFairLine": "Every result is derived from the server seed (its hash is published before the round), your client seed and the nonce. The derivation matches the public Limbo calculators — see the Provably Fair window to verify any round or try your own seeds.",
+    "rulesOpenFair": "Open Provably Fair"
+  },
+  "constants": {
+    "text": "const gc=.01,bc=1.01,eo=1e6,Xs=2,xq=4294967296,$s=425201762304,dm=99/eo,hm=99/bc",
+    "meaning": {
+      "HOUSE_EDGE (gc)": 0.01,
+      "MIN_TARGET (bc)": 1.01,
+      "MAX_TARGET = RESULT_CAP (eo)": 1000000,
+      "DEFAULT_TARGET (Xs)": 2,
+      "TWO32 (xq)": 4294967296,
+      "NUMERATOR ($s = 99 x 2^32)": 425201762304
+    }
+  },
+  "functions": {
+    "resultFromUint32V2 (kc)": "function kc(e){e=Number(e),(!isFinite(e)||e<0)&&(e=0),e>xq-1&&(e=xq-1);const q=1e8/(Math.floor(e)/xq*1e8)*(1-gc),n=Math.max(Math.floor(q*100)/100,1);return Math.min(eo,n)}",
+    "isWin (Am)": "function Am(e,t){return Math.round(Number(e)*100)>=Math.round(fa(t)*100)}",
+    "winningDrawsV2 (wc)": "function wc(e){const t=Math.round(fa(e)*100);let q=0,n=xq;for(;q<n;){const a=Math.floor((q+n)/2);Math.round(kc(a)*100)<t?n=a:q=a+1}return q}",
+    "pWin (gm)": "function gm(e){const t=Math.round(fa(e)*100);return Math.min(xq,Math.floor($s/t))/xq}",
+    "payout (Sc)": "function Sc(e,t,q){if(e=Number(e),!isFinite(e)||e<=0)return 0;const n=q??2,a=BigInt(Math.round(e*Math.pow(10,n))),r=BigInt(Math.round(fa(t)*100));return Number(a*r/BigInt(100))/Math.pow(10,n)}",
+    "clampTarget (fa)": "function fa(e){return e=Number(e),isFinite(e)?Math.min(eo,Math.max(bc,qo(e))):Xs}"
+  }
+}

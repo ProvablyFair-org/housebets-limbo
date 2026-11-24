@@ -1,0 +1,38 @@
+{
+  "exhibit": "E06",
+  "what": "Phase D empty-seed control: the server's answer to POST /change_seed {clientSeed: \"\"}",
+  "source": {
+    "file": "data/supplementary/housebets-limbo-phaseD-200bets.json",
+    "sha256": "8b0559985f2f7259bb7348afaecbff3300111ee6bd5e3d58df8a84b5a98e594e",
+    "field": "meta.emptySeedControl"
+  },
+  "record": {
+    "at": "2026-10-13T11:59:10.799Z",
+    "request": {
+      "method": "POST",
+      "path": "/change_seed",
+      "body": {
+        "gameType": "limbo",
+        "clientSeed": ""
+      }
+    },
+    "seedsBeforeReadAt": "2026-10-13T11:59:12.218Z",
+    "seedsBefore": {
+      "clientSeed": "pflimbo88fca48f2af7a6a85b9d5ae434627756",
+      "hashedServerSeed": "c2c1c45aa12f3eddc5d08e280eddf0bc7c35b84bf6b6d5f6323339f64282e532",
+      "hashedNextServerSeed": "96e2d82a08c8d14c08f71b5a26a6d1a94a5b05be64614ac6c9b42c7dc693bad6",
+      "lastSeed": "",
+      "nonce": 0,
+      "totalBets": 0,
+      "cursor": 0,
+      "id": 103009
+    },
+    "answeredAt": "2026-10-13T11:59:12.461Z",
+    "status": 400,
+    "outcome": "refused",
+    "body": {
+      "error": "an error occurred"
+    },
+    "message": "POST /change_seed 400: {\"error\":\"an error occurred\"}"
+  }
+}

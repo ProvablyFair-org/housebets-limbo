@@ -1,0 +1,760 @@
+{
+  "about": "Step-named mutation registry (LIMBO-29). Each mutation is applied to a disposable copy of the package; 'kills' is the check that must stop passing. 'repin': true re-pins the mutated file's sha256 everywhere in src/ and RELEASE-MANIFEST.json (a forgery that keeps LIMBO-26 green); 'regen' (a name or a list) re-generates artifacts of record in the copy and re-pins them: 'simulate' the census (a cheaper or different experiment posing as the pinned one), 'rtp-table' the RTP table, 'record' the verification record; 'parts' edits several files; 'expectExit' (a code or a list) is the exit the run must end in for the mutation to count as killed (an RTP miss with the table and record regenerated ends in 5, the same change unregenerated in 1; a missing step in 3). 'op': 'rm' deletes 'file' from the copy; 'truncate' keeps the first floor(n·value) records of the array at 'path' ('coherent': every other count in the file that equalled n is set to the new length); 'null' sets 'keys' to null in every record of the array at 'path'. M01n, M05s and M20d (30 Oct 2026): every reveal null, the dataset cut to 80 %, the census deleted; a verifier that throws on one of them prints no row for the check it names, which this battery scores as a survivor, so each must leave its check FAIL with every row printed. 'repinPackage': true (with 'repin') also replaces the mutated file's sha256 in the copy's MANIFEST.md and README.md ('repin' already covers src/ and RELEASE-MANIFEST.json), so that no pin and no quoted hash can catch the change. M24a and M24b (17 Nov 2026) cover LIMBO-24: M24a changes the site-verifier module and re-pins it everywhere, so only the side-by-side run with src/rng.ts can catch it; M24b breaks the module's pin in src/artifact-pins.ts and leaves the module alone.",
+  "mutations": [
+    {
+      "id": "M01",
+      "kills": "LIMBO-01",
+      "what": "swap a revealed seed for another (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "set",
+      "path": "seeds[5].revealedServerSeed",
+      "value": "0000000000000000000000000000000000000000000000000000000000000000",
+      "repin": true
+    },
+    {
+      "id": "M02a",
+      "kills": "LIMBO-02",
+      "what": "break one forward link in Phase A (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "set",
+      "path": "seeds[10].hashedNextServerSeed",
+      "value": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "repin": true
+    },
+    {
+      "id": "M02b",
+      "kills": "LIMBO-02",
+      "what": "break the tail's link to the pair active after the capture (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-tail-30bets.json",
+      "op": "set",
+      "path": "seeds[0].hashedNextServerSeed",
+      "value": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "repin": true
+    },
+    {
+      "id": "M02c",
+      "kills": "LIMBO-02",
+      "what": "a Phase C chain with no pre-capture anchor (re-pinned)",
+      "file": "data/supplementary/housebets-limbo-phaseC-250bets.json",
+      "op": "set",
+      "path": "preCapture.hashedNextServerSeed",
+      "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "repin": true
+    },
+    {
+      "id": "M03",
+      "kills": "LIMBO-03",
+      "what": "one bet answered under another hash (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "set",
+      "path": "bets[200].respHashedSeed",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "repin": true
+    },
+    {
+      "id": "M04",
+      "kills": "LIMBO-04",
+      "what": "repeat a nonce in an epoch (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "set",
+      "path": "bets[60].nonce",
+      "value": 12,
+      "repin": true
+    },
+    {
+      "id": "M05a",
+      "kills": "LIMBO-05",
+      "what": "drop one bet from a whole epoch (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "delete",
+      "path": "bets[120]",
+      "repin": true
+    },
+    {
+      "id": "M05b",
+      "kills": "LIMBO-05",
+      "what": "drop one bet from the tail file (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-tail-30bets.json",
+      "op": "delete",
+      "path": "bets[0]",
+      "repin": true
+    },
+    {
+      "id": "M05c",
+      "kills": "LIMBO-05",
+      "what": "a population constant that agrees with a shrunk tail",
+      "file": "src/loader.ts",
+      "op": "text",
+      "find": "export const EXPECTED_TAIL_BETS = 30;",
+      "replace": "export const EXPECTED_TAIL_BETS = 29;"
+    },
+    {
+      "id": "M06a",
+      "kills": "LIMBO-06",
+      "what": "a Phase D epoch whose seed is not the player-set one (re-pinned)",
+      "file": "data/supplementary/housebets-limbo-phaseD-200bets.json",
+      "op": "set",
+      "path": "seeds[1].clientSeed",
+      "value": "provablyfair-9",
+      "repin": true
+    },
+    {
+      "id": "M06b",
+      "kills": "LIMBO-06",
+      "what": "derivation that ignores the client seed",
+      "file": "src/rng.ts",
+      "op": "text",
+      "find": "update(`${clientSeed}:${nonce}:${block}`)",
+      "replace": "update(`x:${nonce}:${block}`)"
+    },
+    {
+      "id": "M07",
+      "kills": "LIMBO-07",
+      "what": "one served result moved by 0.01 (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "add",
+      "path": "bets[300].outcome",
+      "value": 0.01,
+      "repin": true
+    },
+    {
+      "id": "M08",
+      "kills": "LIMBO-08",
+      "what": "a result map scaled by 1.0001 (biased win probability)",
+      "file": "src/rng.ts",
+      "op": "text",
+      "find": "* (1 - HOUSE_EDGE);",
+      "replace": "* (1 - HOUSE_EDGE) * 1.0001;"
+    },
+    {
+      "id": "M09",
+      "kills": "LIMBO-09",
+      "what": "a published vector misquoted in E01 itself (result 1.38 -> 1.39, re-pinned); LIMBO-09 reads the vectors from E01 at run time",
+      "file": "evidence/E01-limbo-fairness-spec-2026-10-12.json",
+      "op": "set",
+      "path": "answer.body.vectors[0].result",
+      "value": 1.39,
+      "repin": true
+    },
+    {
+      "id": "M10",
+      "kills": "LIMBO-10",
+      "what": "win rule made strict (a tie loses), against the published text",
+      "file": "src/rules.ts",
+      "op": "text",
+      "find": "resultH >= targetH;",
+      "replace": "resultH > targetH;"
+    },
+    {
+      "id": "M11",
+      "kills": "LIMBO-11",
+      "what": "a payout forged up by 1e-8 in the bet and its server record (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "add",
+      "paths": [
+        "bets[12].payout",
+        "bets[12]._raw.round.payout"
+      ],
+      "value": 1e-08,
+      "repin": true
+    },
+    {
+      "id": "M12a",
+      "kills": "LIMBO-12",
+      "what": "an elevated stake that is not the declared one (re-pinned)",
+      "file": "data/supplementary/housebets-limbo-phaseC-250bets.json",
+      "op": "add",
+      "paths": [
+        "bets[3].stake",
+        "bets[3]._raw.round.stake",
+        "bets[3].roundStake"
+      ],
+      "value": 1e-08,
+      "repin": true
+    },
+    {
+      "id": "M12b",
+      "kills": "LIMBO-12",
+      "what": "a $10-set bet at another target (re-pinned)",
+      "file": "data/supplementary/housebets-limbo-phaseC-safe-10usd-200bets.json",
+      "op": "set",
+      "paths": [
+        "bets[5].setting.target",
+        "bets[5].request.betNumber",
+        "bets[5].echoedTarget"
+      ],
+      "value": 1.11,
+      "repin": true
+    },
+    {
+      "id": "M13a",
+      "kills": "LIMBO-13",
+      "what": "a served multiplier off by 1e-8 (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "add",
+      "path": "bets[12].payoutMultiplier",
+      "value": 1e-08,
+      "repin": true
+    },
+    {
+      "id": "M13b",
+      "kills": "LIMBO-13",
+      "what": "the operator's win-chance field forged (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "add",
+      "path": "bets[20]._raw.game.winChance",
+      "value": 1e-08,
+      "repin": true
+    },
+    {
+      "id": "M14",
+      "kills": "LIMBO-14",
+      "what": "a target above the 1,000,000x cap accepted (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "set",
+      "paths": [
+        "bets[0].setting.target",
+        "bets[0].request.betNumber",
+        "bets[0].echoedTarget"
+      ],
+      "value": 1000001,
+      "repin": true
+    },
+    {
+      "id": "M16",
+      "kills": "LIMBO-16",
+      "what": "a bet-history row that disagrees with the bet (re-pinned)",
+      "file": "evidence/E04-limbo-bet-history-2026-10-13.json",
+      "op": "set",
+      "path": "rows[10].payout",
+      "value": "1.00000000",
+      "repin": true
+    },
+    {
+      "id": "M17",
+      "kills": "LIMBO-17",
+      "what": "a tie settled as a loss (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "set",
+      "paths": [
+        "bets[185].payoutMultiplier",
+        "bets[185].payout",
+        "bets[185]._raw.round.payout"
+      ],
+      "value": 0,
+      "repin": true
+    },
+    {
+      "id": "M18",
+      "kills": "LIMBO-18",
+      "what": "a winning-draw count off by one",
+      "file": "src/rng.ts",
+      "op": "text",
+      "find": "if (atB && after) return { count: exact, exact, ok: true };",
+      "replace": "if (atB && after) return { count: exact + 1, exact, ok: true };"
+    },
+    {
+      "id": "M19e",
+      "kills": "LIMBO-19",
+      "what": "the published figure raised in the exhibit itself (E02 rulesRtpLine 99% -> 99.5%, re-pinned), the RTP table and the verification record regenerated and re-pinned: RTP FIGURE OVERSTATED, exit 5",
+      "file": "evidence/E02-limbo-rules-panel-2026-10-10.json",
+      "op": "set",
+      "path": "rulesPanelEnglish.rulesRtpLine",
+      "value": "RTP is 99.5% at every target; the house edge is 0.5%.",
+      "repin": true,
+      "regen": [
+        "rtp-table",
+        "record"
+      ],
+      "expectExit": 5
+    },
+    {
+      "id": "M19en",
+      "kills": "LIMBO-19",
+      "what": "the same E02 raise WITHOUT regenerating the RTP table: the committed table no longer equals the run, a reproduction failure, exit 1",
+      "file": "evidence/E02-limbo-rules-panel-2026-10-10.json",
+      "op": "set",
+      "path": "rulesPanelEnglish.rulesRtpLine",
+      "value": "RTP is 99.5% at every target; the house edge is 0.5%.",
+      "repin": true,
+      "expectExit": 1
+    },
+    {
+      "id": "M19f",
+      "kills": "LIMBO-19",
+      "what": "the published figure raised in the live rules text (E07 rulesRtpLine 99% -> 99.5%, re-pinned), the RTP table and the verification record regenerated and re-pinned: RTP FIGURE OVERSTATED, exit 5",
+      "file": "evidence/E07-limbo-rules-panel-live-2026-10-19.json",
+      "op": "set",
+      "path": "rulesPanelEnglish.rulesRtpLine",
+      "value": "Theoretical RTP before payout rounding: 99.5% (0.5% house edge).",
+      "repin": true,
+      "regen": [
+        "rtp-table",
+        "record"
+      ],
+      "expectExit": 5
+    },
+    {
+      "id": "M19g",
+      "kills": "LIMBO-19",
+      "what": "the figure raised at the other place it is stated, the game settings (E01 houseEdge 0.01 -> 0.005, re-pinned), table and record regenerated and re-pinned: exit 5",
+      "file": "evidence/E01-limbo-fairness-spec-2026-10-12.json",
+      "op": "set",
+      "path": "answer.body.houseEdge",
+      "value": 0.005,
+      "repin": true,
+      "regen": [
+        "rtp-table",
+        "record"
+      ],
+      "expectExit": 5
+    },
+    {
+      "id": "M19c",
+      "kills": "LIMBO-19",
+      "what": "the payout rule pays 1.31x at target 1.32 (no captured bet and no simulation band at 1.32), one setting misses; table and record regenerated and re-pinned: exit 5",
+      "file": "src/rules.ts",
+      "op": "text",
+      "find": "export const multiplierH = (targetH: number): number => targetH;",
+      "replace": "export const multiplierH = (targetH: number): number => (targetH === 132 ? 131 : targetH);",
+      "regen": [
+        "rtp-table",
+        "record"
+      ],
+      "expectExit": 5
+    },
+    {
+      "id": "M19cn",
+      "kills": "LIMBO-19",
+      "what": "the same lowered cell WITHOUT regenerating the RTP table: reproduction failure, exit 1",
+      "file": "src/rules.ts",
+      "op": "text",
+      "find": "export const multiplierH = (targetH: number): number => targetH;",
+      "replace": "export const multiplierH = (targetH: number): number => (targetH === 132 ? 131 : targetH);",
+      "expectExit": 1
+    },
+    {
+      "id": "M20a",
+      "kills": "LIMBO-20",
+      "what": "a forged census bin (re-pinned)",
+      "file": "outputs/simulation-results.json",
+      "op": "add",
+      "path": "pass1.bins[3]",
+      "value": 1,
+      "repin": true
+    },
+    {
+      "id": "M20b",
+      "kills": "LIMBO-20",
+      "what": "a cheaper Pass 1 (100 seeds) regenerated and re-pinned",
+      "file": "src/sim-config.ts",
+      "op": "text",
+      "find": "export const PASS1_SEEDS = 200;",
+      "replace": "export const PASS1_SEEDS = 100;",
+      "regen": "simulate"
+    },
+    {
+      "id": "M20e",
+      "kills": "LIMBO-20",
+      "what": "a cheaper long run at 2.00× (200 seeds, 2,000,000 bets instead of 20,000,000) regenerated and re-pinned",
+      "file": "src/sim-config.ts",
+      "op": "text",
+      "find": "export const SIM_LONG_SEEDS = 2_000;",
+      "replace": "export const SIM_LONG_SEEDS = 200;",
+      "regen": "simulate"
+    },
+    {
+      "id": "M20f",
+      "kills": "LIMBO-20",
+      "what": "a cheaper edge table (100 seeds, 1,000,000 bets per target instead of 2,000,000) regenerated and re-pinned",
+      "file": "src/sim-config.ts",
+      "op": "text",
+      "find": "export const TABLE_SEEDS = 200;",
+      "replace": "export const TABLE_SEEDS = 100;",
+      "regen": "simulate"
+    },
+    {
+      "id": "M20g",
+      "kills": "LIMBO-20",
+      "what": "cheaper 1,000,000-bet targets (500,000 bets per target) regenerated and re-pinned",
+      "file": "src/sim-config.ts",
+      "op": "text",
+      "find": "export const SIM_EDGE_BETS = 1_000_000;",
+      "replace": "export const SIM_EDGE_BETS = 500_000;",
+      "regen": "simulate"
+    },
+    {
+      "id": "M21a",
+      "kills": "LIMBO-21",
+      "what": "a Pass 2 early window that is not the captured depth (40 of 50 nonces), regenerated and re-pinned",
+      "file": "src/sim-config.ts",
+      "op": "text",
+      "find": "export const SIM_PASS2_EARLY = (capturedDepth: number): number => capturedDepth;",
+      "replace": "export const SIM_PASS2_EARLY = (capturedDepth: number): number => Math.min(capturedDepth, 40);",
+      "regen": "simulate"
+    },
+    {
+      "id": "M21b",
+      "kills": "LIMBO-21",
+      "what": "a forged Pass 2 epoch return (re-pinned)",
+      "file": "outputs/simulation-results.json",
+      "op": "set",
+      "path": "pass2.epochs[0].early.scoredRet8",
+      "value": "0",
+      "repin": true
+    },
+    {
+      "id": "M21c",
+      "kills": "LIMBO-21",
+      "what": "Pass 2 narrowed back to the Phase A seeds (the tail, C, the $10 set and D left out), regenerated and re-pinned",
+      "file": "src/simulate.ts",
+      "op": "text",
+      "find": "export const loadPass2Sets = (): { set: string; ds: Dataset }[] => PASS2_SETS.map(([set, f]) => ({ set, ds: load(f) }));",
+      "replace": "export const loadPass2Sets = (): { set: string; ds: Dataset }[] => PASS2_SETS.slice(0, 1).map(([set, f]) => ({ set, ds: load(f) }));",
+      "also": [
+        {
+          "file": "tests/verify.ts",
+          "find": "const p2sets = [{ set: 'A', ds }, { set: 'tail', ds: tail }, { set: 'C', ds: pC }, { set: 'C10', ds: pC10 }, { set: 'D', ds: pD }];",
+          "replace": "const p2sets = [{ set: 'A', ds }];"
+        }
+      ],
+      "regen": "simulate"
+    },
+    {
+      "id": "M26",
+      "kills": "LIMBO-26",
+      "what": "a dataset byte changed, not re-pinned",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "add",
+      "path": "bets[9].outcome",
+      "value": 0.01,
+      "repin": false
+    },
+    {
+      "id": "M26u",
+      "kills": "LIMBO-26",
+      "what": "a user id that is not redacted, re-pinned",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "set",
+      "path": "bets[3]._raw.game.userId",
+      "value": "11111111-2222-4333-8444-555555555555",
+      "repin": true
+    },
+    {
+      "id": "M27",
+      "kills": "LIMBO-27",
+      "what": "a committed RTP table edited and re-pinned",
+      "file": "outputs/rtp-claim-table.json",
+      "op": "set",
+      "path": "settingSpace",
+      "value": "edited",
+      "repin": true
+    },
+    {
+      "id": "M31",
+      "kills": "LIMBO-31",
+      "what": "a scaling-edge block in the published spec (re-pinned)",
+      "file": "evidence/E01-limbo-fairness-spec-2026-10-12.json",
+      "op": "set",
+      "path": "answer.body.scalingEdge",
+      "value": {
+        "floor": 0.01,
+        "ceiling": 0.05
+      },
+      "repin": true
+    },
+    {
+      "id": "M15r",
+      "kills": "LIMBO-15",
+      "what": "a planned target the server refused with a non-transient answer (one transient refusal relabelled in meta.rejected, re-pinned): operator-origin, not a capture gap",
+      "file": "data/captured/housebets-limbo-sp1-6480bets.redacted.json",
+      "op": "set",
+      "path": "meta.rejected[0].body.error",
+      "value": "target not allowed",
+      "repin": true
+    },
+    {
+      "id": "M07t",
+      "kills": "LIMBO-07",
+      "what": "a tail result moved 3.23 -> 3.22 (target 100, still a loss), in the copy and the server answer (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-tail-30bets.json",
+      "op": "set",
+      "paths": [
+        "bets[0].outcome",
+        "bets[0]._raw.game.outcome"
+      ],
+      "value": 3.22,
+      "repin": true
+    },
+    {
+      "id": "M11t",
+      "kills": "LIMBO-11",
+      "what": "a tail payout +1e-8 in the bet, its round record and the server answer (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-tail-30bets.json",
+      "op": "add",
+      "paths": [
+        "bets[2].payout",
+        "bets[2]._raw.round.payout",
+        "bets[2]._raw.game.game.payout"
+      ],
+      "value": 1e-08,
+      "repin": true
+    },
+    {
+      "id": "M07g",
+      "kills": "LIMBO-07",
+      "what": "a losing result given a 3rd decimal (15.98 -> 15.984) in the copy and the server answer (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "set",
+      "paths": [
+        "bets[350].outcome",
+        "bets[350]._raw.game.outcome"
+      ],
+      "value": 15.984,
+      "repin": true
+    },
+    {
+      "id": "M11g",
+      "kills": "LIMBO-11",
+      "what": "a payout given a 9th decimal (0.04361355 -> 0.043613554) in the bet, its round record and the server answer (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "set",
+      "paths": [
+        "bets[353].payout",
+        "bets[353]._raw.round.payout",
+        "bets[353]._raw.game.game.payout"
+      ],
+      "value": 0.043613554,
+      "repin": true
+    },
+    {
+      "id": "M07n",
+      "kills": "LIMBO-07",
+      "what": "the server answer nonce forged, the copy left intact (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "set",
+      "path": "bets[60]._raw.game.game.nonce",
+      "value": 12,
+      "repin": true
+    },
+    {
+      "id": "M07c",
+      "kills": "LIMBO-07",
+      "what": "the server answer client seed forged, the copy left intact (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "set",
+      "path": "bets[60]._raw.game.game.clientSeed",
+      "value": "forged-client-seed",
+      "repin": true
+    },
+    {
+      "id": "M11s",
+      "kills": "LIMBO-11",
+      "what": "the server answer payout forged +1e-8, the copy and round record left intact (re-pinned)",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "add",
+      "path": "bets[353]._raw.game.game.payout",
+      "value": 1e-08,
+      "repin": true
+    },
+    {
+      "id": "M16a",
+      "kills": "LIMBO-16",
+      "what": "E05 ledger line with an impossible entry count (99999 != 86966 + 0 + 13) (re-pinned)",
+      "file": "evidence/E05-account-reconcile-2026-10-13.txt",
+      "op": "text",
+      "find": "ledger: 86979 entries",
+      "replace": "ledger: 99999 entries",
+      "repin": true
+    },
+    {
+      "id": "M16b",
+      "kills": "LIMBO-16",
+      "what": "E05 balance before changed to 123.45678900 (re-pinned)",
+      "file": "evidence/E05-account-reconcile-2026-10-13.txt",
+      "op": "text",
+      "find": "+ open stakes 0 = 986.84718000",
+      "replace": "+ open stakes 0 = 123.45678900",
+      "repin": true
+    },
+    {
+      "id": "M16c",
+      "kills": "LIMBO-16",
+      "what": "E05 limbo Phase C row paid +1e-6 with net, TOTAL and the wallet after moved to stay arithmetically consistent (re-pinned); only the package-computed sums can catch it",
+      "file": "evidence/E05-account-reconcile-2026-10-13.txt",
+      "op": "text",
+      "edits": [
+        {
+          "find": "250    250.077750  261.44128296  +11.36353296",
+          "replace": "250    250.077750  261.44128396  +11.36353396"
+        },
+        {
+          "find": "28024.11851634  -72.64994055",
+          "replace": "28024.11851734  -72.64993955"
+        },
+        {
+          "find": "wallet cash balance after (server, 8 dp): 914.19723945",
+          "replace": "wallet cash balance after (server, 8 dp): 914.19724045"
+        },
+        {
+          "find": "after - net -72.64994055 +",
+          "replace": "after - net -72.64993955 +"
+        }
+      ],
+      "repin": true
+    },
+    {
+      "id": "M07e",
+      "kills": "LIMBO-07",
+      "what": "the game page's result function in E02 changed (the result scaled by 0.999), re-pinned: the page's own function no longer gives the served results",
+      "file": "evidence/E02-limbo-rules-panel-2026-10-10.json",
+      "op": "text",
+      "find": "*(1-gc),n=Math.max",
+      "replace": "*(1-gc)*0.999,n=Math.max",
+      "repin": true
+    },
+    {
+      "id": "M07d",
+      "kills": "LIMBO-07",
+      "what": "the LIMBO-07 step deleted from the verifier (its record() call removed)",
+      "file": "tests/verify.ts",
+      "op": "text",
+      "find": "record('LIMBO-07', p.result === p.n",
+      "replace": "((..._x: any[]) => 0)('LIMBO-07', p.result === p.n"
+    },
+    {
+      "id": "M07p",
+      "kills": "LIMBO-07",
+      "what": "LIMBO-07 deleted from the verifier AND its row from src/profile-map.ts, the verification record regenerated and re-pinned: INCOMPLETE, exit 3",
+      "parts": [
+        {
+          "file": "tests/verify.ts",
+          "op": "text",
+          "find": "record('LIMBO-07', p.result === p.n",
+          "replace": "((..._x: any[]) => 0)('LIMBO-07', p.result === p.n"
+        },
+        {
+          "file": "src/profile-map.ts",
+          "op": "text",
+          "find": "  { id: \"LIMBO-07\", name: \"Result recomputation\", layer: \"S2\", kind: \"verifier-step\", policy: \"HARD_FAIL\" },\n",
+          "replace": ""
+        }
+      ],
+      "regen": [
+        "record"
+      ],
+      "expectExit": 3
+    },
+    {
+      "id": "M07i",
+      "kills": "LIMBO-07",
+      "what": "LIMBO-07 relabelled INFORMATIONAL in src/profile-map.ts and a served result forged +0.01 (re-pinned): exit 3 or 1, never 0",
+      "parts": [
+        {
+          "file": "src/profile-map.ts",
+          "op": "text",
+          "find": "  { id: \"LIMBO-07\", name: \"Result recomputation\", layer: \"S2\", kind: \"verifier-step\", policy: \"HARD_FAIL\" },\n",
+          "replace": "  { id: \"LIMBO-07\", name: \"Result recomputation\", layer: \"S2\", kind: \"verifier-step\", policy: \"INFORMATIONAL\" },\n"
+        },
+        {
+          "file": "data/housebets-limbo-phaseA-6450bets.json",
+          "op": "add",
+          "path": "bets[300].outcome",
+          "value": 0.01,
+          "repin": true
+        }
+      ],
+      "expectExit": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": "M26p",
+      "kills": "LIMBO-26",
+      "what": "the vendored framework profile edited (LIMBO-07 removed) and re-pinned in src/ and RELEASE-MANIFEST.json; the verifier's own pin still differs",
+      "file": "profile/profile.json",
+      "op": "delete",
+      "path": "checks[6]",
+      "repin": true
+    },
+    {
+      "id": "M26e",
+      "kills": "LIMBO-26",
+      "what": "E03 wallet.maxWin changed to 5 (re-pinned); the src/spec.ts copy no longer equals the exhibit",
+      "file": "evidence/E03-limbo-limits-2026-10-12.json",
+      "op": "set",
+      "path": "answer.body.wallet.maxWin",
+      "value": 5,
+      "repin": true
+    },
+    {
+      "id": "M26v",
+      "kills": "LIMBO-26",
+      "what": "the src/spec.ts copy of a published vector misquoted (resultH 138 -> 139); it no longer equals E01",
+      "file": "src/spec.ts",
+      "op": "text",
+      "find": "draw: 3067352357, resultH: 138",
+      "replace": "draw: 3067352357, resultH: 139"
+    },
+    {
+      "id": "M23",
+      "kills": "LIMBO-23",
+      "what": "an S5 row renamed in MANIFEST.md (S5-1 'Replay protection' -> 'Seed substitution', the old row name of this package)",
+      "file": "MANIFEST.md",
+      "op": "text",
+      "find": "| S5-1 | Replay protection |",
+      "replace": "| S5-1 | Seed substitution |"
+    },
+    {
+      "id": "M01n",
+      "kills": "LIMBO-01",
+      "what": "every revealed server seed in Phase A set to null (re-pinned): the hash check scores FAIL and every row still prints",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "null",
+      "path": "seeds",
+      "keys": [
+        "revealedServerSeed"
+      ],
+      "repin": true
+    },
+    {
+      "id": "M05s",
+      "kills": "LIMBO-05",
+      "what": "Phase A cut to its first 80 % (bets 6450 -> 5160), every count in the file that read 6450 made to agree (re-pinned): the population check scores FAIL and every row still prints",
+      "file": "data/housebets-limbo-phaseA-6450bets.json",
+      "op": "truncate",
+      "path": "bets",
+      "value": 0.8,
+      "coherent": true,
+      "repin": true
+    },
+    {
+      "id": "M20d",
+      "kills": "LIMBO-20",
+      "what": "outputs/simulation-results.json deleted: Pass 1 has no census to equal, scores FAIL, and every row still prints",
+      "file": "outputs/simulation-results.json",
+      "op": "rm"
+    },
+    {
+      "id": "M24a",
+      "kills": "LIMBO-24",
+      "what": "site-verifier/derive.js: the 0.99 factor dropped from the result formula inside the module (results 1 % higher), the file re-pinned in src/artifact-pins.ts and RELEASE-MANIFEST.json and its sha256 replaced in MANIFEST.md and README.md: every pin and quoted hash agrees, and the side-by-side run with src/rng.ts on the captured bets catches it",
+      "file": "site-verifier/derive.js",
+      "op": "text",
+      "find": "  const q = 1e8 / (Math.floor(u) / TWO32 * 1e8) * (1 - HOUSE_EDGE);",
+      "replace": "  const q = 1e8 / (Math.floor(u) / TWO32 * 1e8);",
+      "repin": true,
+      "repinPackage": true
+    },
+    {
+      "id": "M24b",
+      "kills": "LIMBO-24",
+      "what": "the pin of site-verifier/derive.js in src/artifact-pins.ts (SITE_VERIFIER_PIN) no longer the sha256 of the shipped module, the module itself untouched",
+      "file": "src/artifact-pins.ts",
+      "op": "text",
+      "find": "['site-verifier/derive.js', '",
+      "replace": "['site-verifier/derive.js', '0"
+    }
+  ]
+}

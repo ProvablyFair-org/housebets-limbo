@@ -1,0 +1,49 @@
+{
+  "package": "housebets/limbo",
+  "game": "limbo",
+  "settingSpace": "every legal target 1.01×–1,000,000.00× in 0.01× steps (99,999,900 settings); rows retained: the extremes and any house-side setting",
+  "rtpMethod": "exact rational: winning draws w(T) of the 2^32 under the declared formula (src/rng.ts winningDraws) × T/100, over 2^32",
+  "rule": "RTP-CLAIM",
+  "ruleVersion": "1.2.0 (Methodology v1.1: places, per-setting, stake tiers, noted, published, RTP Figure Overstated; agreed 2026-10-14; 1.1.0 2026-10-01; 1.0.0 2026-09-29)",
+  "bandPp": "0.10",
+  "claim": {
+    "kind": "flat",
+    "rtp": "0.99",
+    "source": "HouseBets limbo; the figure is stated in two of the rule's places in our evidence. The rules: the rules panel text in the game's page code (E02 rulesRtpLine \"RTP is 99% at every target; the house edge is 1%.\"; bundle platform-housegames-limbo-game.js sha256 7b12dc43…, checked on the live page 2026-10-10 (bundles/LIVE-BUNDLES.md); the rendered panel was not captured, P-2), reworded in the live copy of the same bundle (E07 rulesRtpLine \"Theoretical RTP before payout rounding: 99% (1% house edge).\"; bundle sha256 02e71df4…, last-modified Fri, 16 Oct 2026 09:18:09 GMT, fetched Mon, 19 Oct 2026 13:01:23 GMT). The game settings the site loads: the fairness answer (E01 GET /housegames/limbo/fairness, read by the capture 2026-10-12: houseEdge 0.01; \"A target t is reached with probability 0.99 / t: a 1% edge at every target.\")"
+  },
+  "settings": 99999900,
+  "trueMin": {
+    "setting": "target 1.32",
+    "rtpExact": "99/100",
+    "rtpPct": "99.000000"
+  },
+  "trueMax": {
+    "setting": "target 999769.01",
+    "rtpExact": "212650868427/214748364800",
+    "rtpPct": "99.023277"
+  },
+  "houseSideFailures": 0,
+  "playerFavourable": 0,
+  "worst": {
+    "setting": "target 1.32",
+    "gapPp": "0.000000"
+  },
+  "rangeChecks": [],
+  "outcome": "PASS",
+  "minimalFix": "none — the claim holds for every setting it states a figure for",
+  "unstated": 0,
+  "rowsComplete": false,
+  "buckets": [
+    {"bucket":"1×–10×","settings":899,"minPct":"99.000000","maxPct":"99.000000","houseSideFailures":0,"playerFavourable":0},
+    {"bucket":"10×–100×","settings":9000,"minPct":"99.000000","maxPct":"99.000002","houseSideFailures":0,"playerFavourable":0},
+    {"bucket":"100×–1000×","settings":90000,"minPct":"99.000000","maxPct":"99.000023","houseSideFailures":0,"playerFavourable":0},
+    {"bucket":"1000×–10000×","settings":900000,"minPct":"99.000000","maxPct":"99.000233","houseSideFailures":0,"playerFavourable":0},
+    {"bucket":"10000×–100000×","settings":9000000,"minPct":"99.000000","maxPct":"99.002327","houseSideFailures":0,"playerFavourable":0},
+    {"bucket":"100000×–1000000×","settings":90000000,"minPct":"99.000000","maxPct":"99.023277","houseSideFailures":0,"playerFavourable":0},
+    {"bucket":"1,000,000×","settings":1,"minPct":"99.022873","maxPct":"99.022873","houseSideFailures":0,"playerFavourable":0}
+  ],
+  "rows": [
+    {"setting":"target 1.32","rtpExact":"99/100","rtpPct":"99.000000","gapPp":"0.000000","side":"within-band","outcome":"PASS"},
+    {"setting":"target 999769.01","rtpExact":"212650868427/214748364800","rtpPct":"99.023277","gapPp":"0.023277","side":"within-band","outcome":"PASS"}
+  ]
+}

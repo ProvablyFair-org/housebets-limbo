@@ -1,0 +1,29 @@
+{
+  "exhibit": "E03",
+  "what": "HouseBets limbo limits (GET /housegames/limits/limbo)",
+  "source": {
+    "file": "data/captured/housebets-limbo-sp1-6480bets.redacted.json",
+    "sha256": "88acb2f0213655a9aa33dd96c789b9ad3b16bc5cec9f87352a302badf0ff0a4d",
+    "field": "meta.preflight.limits"
+  },
+  "answer": {
+    "path": "/limits/limbo",
+    "at": "2026-10-12T17:04:46.261Z",
+    "body": {
+      "game": "limbo",
+      "maxBet": 20000,
+      "maxWin": 1000000,
+      "minBet": 0.01,
+      "source": "server-config",
+      "unit": "USD",
+      "wallet": {
+        "currency": 1,
+        "decimals": 8,
+        "maxBet": 20006.20192259,
+        "maxWin": 1000310.0961298,
+        "minBet": 0.01000311,
+        "symbol": "USDT"
+      }
+    }
+  }
+}

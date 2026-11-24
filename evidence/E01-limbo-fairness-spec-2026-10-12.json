@@ -1,0 +1,60 @@
+{
+  "exhibit": "E01",
+  "what": "HouseBets House Games limbo: the server's published fairness spec (GET /housegames/limbo/fairness)",
+  "source": {
+    "file": "data/captured/housebets-limbo-sp1-6480bets.redacted.json",
+    "sha256": "88acb2f0213655a9aa33dd96c789b9ad3b16bc5cec9f87352a302badf0ff0a4d",
+    "field": "meta.preflight.fairness"
+  },
+  "answer": {
+    "path": "/limbo/fairness",
+    "at": "2026-10-12T17:04:46.508Z",
+    "body": {
+      "version": "canonical-v2",
+      "hash": "HMAC-SHA256",
+      "key": "serverSeed",
+      "message": "clientSeed:nonce:block",
+      "bytesPerDigest": 32,
+      "bytesPerDraw": 4,
+      "byteOrder": "big-endian",
+      "drawBits": 32,
+      "houseEdge": 0.01,
+      "scale": 100,
+      "rounding": "floor",
+      "min": 1,
+      "max": 1000000,
+      "winRule": "result >= target",
+      "summary": "Every result is HMAC-SHA256 keyed with the server seed, over the message clientSeed:nonce:block — the block is the byte cursor divided by 32, and limbo reads one draw at cursor 0, so its block is 0. The first 4 bytes of that digest, read big-endian, are the draw u (0 to 2^32 - 1), and float = u / 2^32. The result is floor(1e8 / (float x 1e8) x 0.99 x 100) / 100, at least 1.00x and at most 1000000x, and a bet wins when result >= target. This is the standard Limbo formula: any public Limbo calculator given the revealed server seed, the client seed and the nonce prints the same multiplier. A target t is reached with probability 0.99 / t: a 1% edge at every target. The server seed is committed up front by its SHA-256 hash and revealed when you rotate, so a result can never be changed after the fact.",
+      "vectors": [
+        {
+          "serverSeed": "housebets-demo-server-seed-0001",
+          "clientSeed": "demo-client",
+          "nonce": 1,
+          "draw": 3067352357,
+          "result": 1.38
+        },
+        {
+          "serverSeed": "housebets-demo-server-seed-0001",
+          "clientSeed": "demo-client",
+          "nonce": 2,
+          "draw": 3513789633,
+          "result": 1.21
+        },
+        {
+          "serverSeed": "housebets-demo-server-seed-0001",
+          "clientSeed": "demo-client",
+          "nonce": 3,
+          "draw": 3992373399,
+          "result": 1.06
+        },
+        {
+          "serverSeed": "5a1f7d2c9e4b8a3f6d0c2b5e8f1a4d7c0b3e6f9a2d5c8b1e4f7a0d3c6b9e2f5a",
+          "clientSeed": "housebets",
+          "nonce": 1,
+          "draw": 2685149531,
+          "result": 1.58
+        }
+      ]
+    }
+  }
+}

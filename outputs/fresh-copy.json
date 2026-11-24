@@ -1,0 +1,17 @@
+{
+  "node": "22.23.1",
+  "rngTestsExit": 0,
+  "exit": 0,
+  "verdict": "PROVABLY FAIR — Full Pass",
+  "standaloneExit": 0,
+  "standaloneVerdict": "PROVABLY FAIR — Full Pass",
+  "cleanVerdict": true,
+  "reproduced": true,
+  "simulateExit": 0,
+  "beyondTolerance": 0,
+  "pinnedUnchanged": true,
+  "changed": [],
+  "sourcesSha256": "8e48db94258a54aff663c84abf7878eacdb82a4cfe6a1a8146d1b2a5e0cfb888",
+  "scriptSha256": "83c04e1bebb3e521bc35b5520f38bb5cfe0973bccea5d427868db24b99a0e919",
+  "verifyJsSha256": "aa195862ee1200d15f61c290e2bc2d5dcb0f09aea97a3c03cc27ece7b3ee6e60"
+}

@@ -1,0 +1,5 @@
+# Phase A split (src/split.ts via scripts/split-whole-epochs.mjs), re-run by the -05 check. Input: the shipped captured
+# file, i.e. the as-captured file with the audit account's user id redacted (data/REDACTION.txt gives the as-captured sha256).
+captured    housebets-limbo-sp1-6480bets.redacted.json 88acb2f0213655a9aa33dd96c789b9ad3b16bc5cec9f87352a302badf0ff0a4d
+primary     housebets-limbo-phaseA-6450bets.json b18a02b7e1334d1f86c84248b5e25892b6e022f89804c1694ebe8ebb0afd803f
+tail        housebets-limbo-phaseA-tail-30bets.json 50426eab9268df584394d62d564dfe095f34ec916227df40754e01cde121dd75

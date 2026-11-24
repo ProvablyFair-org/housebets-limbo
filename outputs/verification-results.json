@@ -1,0 +1,187 @@
+{
+  "suite": "housebets-limbo",
+  "profileSha256": "c5a7be5e09e5c94846e19e7c9b6619e358d005c5c0614bdacdc697e59abbb530",
+  "profileBinding": true,
+  "verdict": "PROVABLY FAIR — Full Pass",
+  "summary": {
+    "passes": 21,
+    "fails": 0,
+    "overstated": 0,
+    "operatorFlags": 0,
+    "captureFlags": 1,
+    "packageChecks": 5,
+    "excluded": [
+      "LIMBO-27"
+    ]
+  },
+  "steps": [
+    {
+      "id": "LIMBO-01",
+      "status": "PASS",
+      "origin": null,
+      "detail": "sha256(utf8(revealed)) == committed: 129/129 Phase A seeds, 143/143 across Phase A, tail, C, C $10 and D; 0 unverifiable bets"
+    },
+    {
+      "id": "LIMBO-02",
+      "status": "PASS",
+      "origin": null,
+      "detail": "Phase A 128/128 links, pre-capture anchor true, Phase A → tail link true, tail → pair active after the capture true; C 4/4 anchor true, C $10 3/3 anchor true, D 3/3 anchor true"
+    },
+    {
+      "id": "LIMBO-03",
+      "status": "PASS",
+      "origin": null,
+      "detail": "129/129 epochs: every bet carries its epoch's server-seed hash and client seed in the server's answer"
+    },
+    {
+      "id": "LIMBO-04",
+      "status": "PASS",
+      "origin": null,
+      "detail": "129/129 epochs: nonces exactly 1..50, once each, no gap, repeat or reorder, and N == the server's nonce read at rotation"
+    },
+    {
+      "id": "LIMBO-05",
+      "status": "PASS",
+      "origin": null,
+      "detail": "Phase A 6450 bets / 129 seeds / 129 epochs, every epoch 50: true; tail 30 (own file, disclosed DL-1); the captured file 6480 bets / 130 seeds; supplementary C 250, C $10 200, D 200 — against src/loader.ts constants, never meta; the split re-run from the captured file (the as-captured file with the user id redacted, data/REDACTION.txt) reproduces both files byte for byte; bets placed (the capture's clock, printed, not checked): Phase A 2026-10-12T17:04:50.197Z … 2026-10-12T19:43:40.026Z, tail 2026-10-12T19:43:41.956Z … 2026-10-12T19:44:38.464Z, C 2026-10-13T11:53:48.653Z … 2026-10-13T11:58:51.163Z, C $10 2026-10-13T12:31:13.067Z … 2026-10-13T12:32:27.508Z, D 2026-10-13T11:59:17.747Z … 2026-10-13T12:02:52.395Z"
+    },
+    {
+      "id": "LIMBO-06",
+      "status": "PASS",
+      "origin": null,
+      "detail": "a wrong client seed changes 6434/6450 results (16 same-result collisions, expected 23.0 from the exact Σ P(R)² = 3.563e-3, bound 52.0); Phase D: player-set seeds [\"provablyfair-1\",\"provablyfair-2\",\"player-seed-abc\",\"1234567890\"] (predictable, disclosed DL-2, all 4 epochs exposed), 200/200 results and 200/200 payouts recompute, server answer == copy 200/200, 199/200 change vs the previous client seed; phases A–C: the capture rig's client-seed source label reads \"node:crypto randomBytes(16) hex\" (a CSPRNG) on 139/139 seeds (a label check: the code that ran is not re-executed here); empty-seed control: one request, answered HTTP 400 with a generic error (E06), nothing read afterwards"
+    },
+    {
+      "id": "LIMBO-07",
+      "status": "PASS",
+      "origin": null,
+      "detail": "result == the published formula (E01: u = first 4 bytes of HMAC-SHA256(serverSeed, clientSeed:nonce:0), floor(1e8/(u/2^32·1e8)·0.99·100)/100 in [1.00, 1e6]) on the 0.01× lattice, compared exactly: 6450/6450 Phase A, 680/680 tail + C + C $10 + D; the exact rational form floor(99·2^32/u) gives the same result on 7130/7130; the game page's own result function (E02 resultFromUint32V2, run from the exhibit's text on each bet's draw; a second check, not the source of src/rng.ts) == the served result 6450/6450 Phase A, 680/680 tail + C + C $10 + D; answer seeds == epoch seeds 6450/6450; the server's raw answer (result, nonce, client seed, hashed seed, seed pair, echoed target) == the copy the recompute uses: 6450/6450 Phase A, 680/680 tail + C + C $10 + D; results compared on the 0.01 lattice as served, off the lattice 0; coverage 6450 == expectedBets"
+    },
+    {
+      "id": "LIMBO-08",
+      "status": "PASS",
+      "origin": null,
+      "detail": "the draw u is a full 32-bit value (no range reduction); the declared float formula's winning draws counted exactly for every one of 99,999,900 legal targets at the monotone step around the exact boundary floor(99·2^32/T) (non-monotone steps: 0); worst |P(win) − 0.99/target| = 1.000000 × 2^-32 (bound: ≤ 2^-32), reached at 78 targets, every one a divisor of 99·2^32 (0 that are not), where the boundary draw itself wins; the binary64 formula and the exact rational one differ at 40 targets (1.32, 1.76, 2.64, 3.52, 5.28, 7.04, …), each by the single draw u = 99·2^32/T, which the float formula scores as T − 0.01: there P(win) is exactly 0.99/target instead of 2^-32 above it (disclosed DL-4)"
+    },
+    {
+      "id": "LIMBO-09",
+      "status": "PASS",
+      "origin": null,
+      "detail": "the 4 worked examples of HouseBets' published spec, read from E01 at run time (draw and result) 4/4; the first captured winner (bet idx 12, target 1.09, result 1.62, payout 0.01090338) recomputes: true; also tests/rng.test.ts"
+    },
+    {
+      "id": "LIMBO-10",
+      "status": "PASS",
+      "origin": null,
+      "detail": "win == (result ≥ target, to the cent) recomputed from the result, never the served flag: 6450/6450; every recomputed result in [1.00×, 1,000,000×]: 6450/6450; target as sent == echoed == setting 6450/6450"
+    },
+    {
+      "id": "LIMBO-11",
+      "status": "PASS",
+      "origin": null,
+      "detail": "payout == floor(stake × target) at 1e-8 on a win, 0 on a loss, every money value on the 1e-8 grid as served: 6450/6450 Phase A, 680/680 tail/C/D; capture copy == the server's own round record (roundId, stake, payout) 6450/6450 Phase A, 680/680 tail/C/D; the server's raw answer (stake, payout, multiplier, round id) == the copy 6450/6450 Phase A, 680/680 tail/C/D; money values off the grid 0"
+    },
+    {
+      "id": "LIMBO-12",
+      "status": "PASS",
+      "origin": null,
+      "detail": "Phase C 250 bets at target 1.98 at 1.000311 (= 100 × E03 minimum 0.01000311: true): results 250/250, multipliers 132/132, payouts 250/250, stake as sent and settled true, server answer == copy 250/250, 132 elevated wins (≥ 100); $10 set 200 bets at target 1.10 at 10: results 200/200, multipliers 178/178, payouts 200/200, stake true, server answer == copy 200/200, 178 wins (≥ 100); same result function, win rule and payout rule as base stake"
+    },
+    {
+      "id": "LIMBO-13",
+      "status": "PASS",
+      "origin": null,
+      "detail": "multiplier paid on a win == the chosen target exactly (E02 \"The payout is your stake × target\"): 922/922 Phase A winners, 345/345 tail/C/D winners; losers served 0 5528/5528; the edge sits in the result formula's numerator 0.99 = 1 − E02 HOUSE_EDGE gc 0.01, NUMERATOR $s = 425201762304 = 99·2^32 (E02 constants, held equal to src/spec.ts by LIMBO-26); the operator's winChance field equals round8(99 ÷ target %) on 7130/7130 bets (compared, never used)"
+    },
+    {
+      "id": "LIMBO-14",
+      "status": "PASS",
+      "origin": null,
+      "detail": "every chosen target on the 0.01× grid within [1.01×, 1,000,000×] (E02 bc, eo): 7130/7130; result cap 1,000,000× declared (E01 max, E02 rulesCapLine, targets above it cannot be entered); maximum win 1000310.0961298 USDT (E03 wallet.maxWin), a bet that would exceed it is refused, not reduced (E02 rulesMaxWin, declared: true); max bet 20,006.20192259 USDT (E03 wallet) × 1,000,000× = 20,006,201,922.59 > max win: true (the refusal is reachable within the bet limits); largest captured payout 19.30850307 USDT; the advertised maximum target 1,000,000× is playable at the minimum stake (pays 10003.11 ≤ cap: true) and was played 130 times in Phase A; the target ceiling is client-side (E02 clampTarget, declared: true); declared unwitnessed (DL-10): no bet near the max-win cap was placed, so the refusal was never produced, and no target above the client-side ceiling was sent, so whether the server enforces it is not known"
+    },
+    {
+      "id": "LIMBO-15",
+      "status": "FLAG",
+      "origin": "capture",
+      "detail": "15 plan classes (src/loader.ts) each ≥ 50 in Phase A: min 125 (random 4645; 14 fixed targets 125–130 each); target decades 1×…1,000,000× each ≥ 50: 10^0: 1666, 10^1: 1044, 10^2: 906, 10^3: 883, 10^4: 907, 10^5: 914, 1e6: 130; minimum legal target 1.01× played: true; 4278 distinct targets; targets sent above the client-side ceiling 1,000,000×: 0; requests the server refused during Phase A: 20 (20 transient \"Transaction temporarily unavailable\", DL-1; 0 other) — the plan's classes, decades and minimum target are covered; the profile's \"targets on both sides of a client-side cap the server accepts\" is not: no target above the ceiling was sent (DL-10). An auditor-side coverage shortfall: capture-origin FLAG, verdict-neutral"
+    },
+    {
+      "id": "LIMBO-16",
+      "status": "PASS",
+      "origin": null,
+      "detail": "every limbo round of the package is in the platform's bet history with the same stake, payout and won/lost status: 7130/7130 (E04, 7130 rows); E05 (the full reconcile-full.py output, 60 capture-file rows over 11 games) checked by its numbers: every row's net == paid − staked true; TOTAL == the sum of the rows (86966 rounds) true; ledger entries 86979 == 86966 captured + 0 open + 13 from 10 Oct, captured == TOTAL rounds, 0 unexplained: true; this package's 4 capture files (7130 rounds): rounds, staked and paid == the sums of the server's round records in the package's own datasets 4/4; balance before == wallet balance after 914.19723945 − net -72.64994055 + open stakes 0 = 986.84718000, == the reconcile run's --before argument 986.84718000: true (that argument is the figure the run was given; the page-header read it came from was not kept, disclosed DL-11); the last answer's 4-dp balance 914.1972 == the balance after to 4 dp: true; the exhibit ends RECONCILED: true; the per-bet balance field is not used: 8 games were captured concurrently"
+    },
+    {
+      "id": "LIMBO-17",
+      "status": "PASS",
+      "origin": null,
+      "detail": "tie (result == target) wins, as published \"at least your target (compared to the cent)\": witnessed 10/10 ties paid; result floor 1.00× (a point mass) loses at every legal target (≥ 1.01×): witnessed 121/121 floor results lost; result cap 1,000,000×: 0 witnessed (a draw reaches it with probability 4253/2^32); declared unwitnessed (DL-3): cap — the cap is taken from E01/E02 and the formula (the limbo page's code calls /bet, /change_seed, /fairness, /limits, /seeds and /unhash, none of which returns a result without a bet)"
+    },
+    {
+      "id": "LIMBO-18",
+      "status": "PASS",
+      "origin": null,
+      "detail": "for each of the 4425 distinct served targets the winning-draw count found by bisection over all 2^32 draws equals the count the package uses: 4425/4425; and P(win) is at most 2^-32 from the published \"Win chance = 99 ÷ target, in percent\" (E02, read at run time): 4425/4425; no operator win-chance field is read (LIMBO-13 only compares it); negative control: one served result moved by 0.01× is rejected (1/1 mismatch)"
+    },
+    {
+      "id": "LIMBO-19",
+      "status": "PASS",
+      "origin": null,
+      "detail": "99,999,900 legal targets (every 0.01× from 1.01× to 1,000,000×), RTP = winning draws × the payout rule's multiplier (src/rules.ts multiplierH) over 2^32: derived RTP 0.990000000000 (target 1.32) … 0.990232771388 (target 999769.01) vs the flat 0.99 claim, read from the pinned exhibits at run time at every place they state it: rules (E02 rulesRtpLine: 0.99), rules (E07 rulesRtpLine: 0.99), game settings (E01 houseEdge: 0.99), game settings (E01 summary: 0.99); never below 99 % (the winning-draw count rounds up to the next whole draw), at most 2.33e-4 above; 0 house-side beyond the 0.1 pp band, 0 player-favourable beyond it → RTP-CLAIM PASS (rule RTP-CLAIM 1.2.0, enforced true: PASS); committed table (outputs/rtp-claim-table.json) == this run's and its pin: true (a table that does not is a reproduction failure, FAIL, miss or no miss)"
+    },
+    {
+      "id": "LIMBO-20",
+      "status": "PASS",
+      "origin": null,
+      "detail": "census re-run in full == the pinned outputs/simulation-results.json byte for byte: true; 2,000,000 fresh draws u: chi² 112.74 (df 127, 128 bins of exactly 2^25 values) p 0.8128, lag-1 r -1.37e-3 z -1.944 p 0.0519, runs z 1.068 p 0.2856 (each ≥ α/3 = 0.0033: true); 9/9 targets of 1,000,000 bets within 5·SE + 1e-4 of the exact RTP (1.01× … 10,000×, the design's set, each on its own seeds: true); worst |Δ|/SE 1.42; tolerance |RTP_sim − RTP_exact| ≤ 5·SE + 0.0001, SE = σ/√n, per target |Δ| vs width: 1.01× 0.00000 ≤ 0.00080; 1.5× 0.00027 ≤ 0.00365; 2× 0.00106 ≤ 0.00510; 5× 0.00244 ≤ 0.01006; 10× 0.00221 ≤ 0.01503; 50× 0.00990 ≤ 0.03493; 100× 0.00070 ≤ 0.04960; 1000× 0.01300 ≤ 0.15734; 10000× 0.04000 ≤ 0.49757; the long run of 20,000,000 bets at 2×: simulated RTP 99.0026 % vs exact 99.0000 %, |Δ| 0.000026 ≤ 0.001218 (SE 2.236e-4, |Δ|/SE 0.12): true; its running RTP at 1,000: 102.0000 % (SE 3.1621 pp), 10,000: 99.6000 % (SE 0.9999 pp), 100,000: 99.4980 % (SE 0.3162 pp), 1,000,000: 99.1270 % (SE 0.1000 pp), 5,000,000: 98.9838 % (SE 0.0447 pp), 10,000,000: 98.9958 % (SE 0.0316 pp), 20,000,000: 99.0026 % (SE 0.0224 pp); the edge table, 8/8 targets of 2,000,000 bets within tolerance, worst |Δ|/SE 2.82, per target |Δ| vs width: 1.1× 0.00006 ≤ 0.00127; 1.5× 0.00142 ≤ 0.00261; 2× 0.00138 ≤ 0.00364; 5× 0.00182 ≤ 0.00714; 10× 0.00224 ≤ 0.01066; 20.14× 0.00556 ≤ 0.01549; 100× 0.00255 ≤ 0.03510; 1000× 0.00600 ≤ 0.11129; rows whose width exceeds the 1 % house edge, so that row alone cannot detect an edge of that size: of the 1,000,000-bet targets 5×, 10×, 50×, 100×, 1000×, 10000×; of the 2,000,000-bet targets 10×, 20.14×, 100×, 1000×; the long run's width is 0.001218; false-alarm rates: uniformity 0.0033, worst row 1.7e-6, any row 8.0e-6"
+    },
+    {
+      "id": "LIMBO-21",
+      "status": "PASS",
+      "origin": null,
+      "detail": "143 revealed epochs (every revealed seed of the five bet files: A 129, tail 1, C 5, C $10 4, D 4; == the population constants and the revealed seeds: true) × 10,000 nonces (early = 1..n, n = the epoch's captured depth, 50, the tail 30; reference = n+1..10000; every early window == the epoch's captured nonces: true); scored statistic (since 14 Oct 2026, the roulette/keno form): the per-slot standardised early-window return of the 3391 scored played slots (target ≤ 100×, src/sim-config.ts) z -0.180, one-sided p 0.4286 (≥ 0.01: true); printed, not scored: the Phase A epochs alone z -0.457 (2839 slots), the other 14 z 0.590 (552 slots); reference window z -1.492; all 7130 slots z -0.165 p 0.4344 (printed, not scored; 3739 played slots above 100× are unscored); the switch from the pooled form was made after the pooled result was known: pooled (scored until 14 Oct, printed) z -0.077, p 0.4694, reference z -1.177, all slots z -0.064; per-target census counts == the window totals: true; 101 epochs below expectation, 42 at or above (descriptive, not a test: under fair play 99.2 ± 5.47 of 143 are below, because the return is right-skewed; src/false-alarm-pass2.ts); early window == the captured served multipliers: true; detection power of the scored statistic: a 4.09 pp per-bet RTP deficit at 80 % (on all slots 5.83 pp; pooled form 21.79 pp); false-alarm rate of the scored rule 0.00946 ± 0.000216 (pooled rule 0.005 ± 0.000158; declared in src/false-alarm-pass2.ts from 200,000 honest replicates and re-derived by npm run false-alarm:pass2, not re-run by verify; ≤ 0.01)"
+    },
+    {
+      "id": "LIMBO-22",
+      "status": "INFO",
+      "origin": null,
+      "detail": "6450 captured results: point mass at 1.00× 112 vs expected 127.7 (z -1.41); continuous part (6338) KS D 0.01215 p 0.3047 against P(R ≥ x) = 0.99/x; lag-1 r -0.00815; runs z 2.169 p 0.0301 — informational (a 6450-round sample has little power and never bears the verdict)"
+    },
+    {
+      "id": "LIMBO-23",
+      "status": "PASS",
+      "origin": null,
+      "detail": "MANIFEST.md S5 fairness-integrity matrix (between the S5-MATRIX markers): 8/8 rows carry the framework's id and name in order (S5-1 Replay protection, S5-2 Input validation, S5-3 Seed integrity under adversarial input, S5-4 Cross-player isolation, S5-5 Payout field integrity, S5-6 Nonce sequence enforcement, S5-7 Parameter boundary enforcement, S5-8 Game-specific state) and a status (6 Pass on every control the row names, 2 Pass on part of the controls it names, 0 Not tested); columns Test ID | Category | What the framework tests | Result | Tied to; the profile's -23 rule does not list the names (the framework list above is used)"
+    },
+    {
+      "id": "LIMBO-24",
+      "status": "PASS",
+      "origin": null,
+      "detail": "site-verifier/derive.js (generated from src/rng.ts by scripts/build-site-verifier.mjs): sha256 a375ed511eec67360ea34b21c22ee2a4742267c46c6b83263135e65d3cd9577a; == SITE_VERIFIER_PIN in src/artifact-pins.ts: true; == its RELEASE-MANIFEST.json pin: true; quoted in MANIFEST.md and README.md: true; the module loaded from that file exports what src/rng.ts exports (boundaryDraw, drawU, hmacBlock, resultExactH, resultFromU, resultHundredths, sha256Hex, winningDraws): true; run side by side with src/rng.ts on every captured round of the 5 shipped datasets: 7130 rounds, 50053 calls (sha256Hex 143, hmacBlock 7130, drawU 7130, resultFromU 7130, resultExactH 7130, resultHundredths 7130, boundaryDraw 7130, winningDraws 7130; 8/8 exports exercised), 0 differing results"
+    },
+    {
+      "id": "LIMBO-25",
+      "status": "PASS",
+      "origin": null,
+      "detail": "README.md \"Verify a bet\" carries where the seed is revealed, the fields, the commitment encoding, the HMAC key's encoding (the seed's text as UTF-8, not the 32 bytes it hex-decodes to) and the result formula: 7/7 markers"
+    },
+    {
+      "id": "LIMBO-26",
+      "status": "PASS",
+      "origin": null,
+      "detail": "6 datasets + 7 evidence exhibits match their sha256 pinned in src/loader.ts, and profile/profile.json the framework profile's sha256 c5a7be5e09e5…; the src/spec.ts constants equal the values parsed from the pinned exhibits E01–E03: 19/19; the audit account's user id is redacted in the shipped datasets (data/REDACTION.txt): userId values \"redacted\" 13610, nil UUID 40830, any other value 0; every bet's _raw.game.userId == \"redacted\": true"
+    },
+    {
+      "id": "LIMBO-30",
+      "status": "PASS",
+      "origin": null,
+      "detail": "MANIFEST.md: 14 declared-limitation rows; load-bearing premises with \"Could the data contradict it?\": true; every exhibit E01…E07 listed by file name: true"
+    },
+    {
+      "id": "LIMBO-31",
+      "status": "PASS",
+      "origin": null,
+      "detail": "no scaling edge: the published spec (E01) carries one flat houseEdge figure and no scaling, tier or exposure block (true); the edge applied to every bet is the result formula's 0.99 numerator, and every winner across the stakes 0.01000311, 1.000311, 10 was paid exactly its target: 1267/1267 — the applied edge equals the flat edge on every bet"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "exhibit": "E07",
+  "what": "HouseBets limbo game page: the rules panel text (English) as shipped in the bundle the live page URL served on 19 Oct 2026 (last-modified Fri, 16 Oct 2026 09:18:09 GMT, the same last-modified as the other ten House Games bundles fetched that day). E02 is the same panel in the 10 Oct copy, the bundle in force while this package's rounds were captured (12-13 Oct).",
+  "source": {
+    "file": "bundles/live-2026-10-19/platform-housegames-limbo-game.js (HouseBets workshop)",
+    "url": "/static/platform-housegames-limbo-game.js",
+    "sha256": "02e71df4d1d28f8e416136d3a26c104d81d3d957bcec57eb5a535201ebfcff4c",
+    "bytes": 817710,
+    "lastModified": "Fri, 16 Oct 2026 09:18:09 GMT",
+    "etag": "W/\"c7a2e-1a144012868\"",
+    "fetchedAt": "Mon, 19 Oct 2026 13:01:23 GMT",
+    "contentType": "application/javascript; charset=UTF-8",
+    "loadedByLivePage": "not re-checked on 19 Oct; the same /static URL the live page loaded on 10 Oct (bundles/LIVE-BUNDLES.md)"
+  },
+  "previous": {
+    "exhibit": "E02",
+    "file": "evidence/E02-limbo-rules-panel-2026-10-10.json",
+    "bundleSha256": "7b12dc436331d91610c727905c71f6404b38113ef144da0e6c9c5f829ff92b00",
+    "bytes": 798234
+  },
+  "rulesPanelEnglish": {
+    "rulesShort": "Rules",
+    "rulesHow": "How to play",
+    "rulesPickTarget": "Pick a target multiplier between {min}× and {max}×. The game draws a result between {rmin}× and {rmax}×.",
+    "rulesWinWhen": "You win when the result is at least your target (compared to the cent). The payout is your stake × target.",
+    "rulesFreeRound": "A 0.00 stake plays a free round — the game runs and no money moves.",
+    "rulesOdds": "Odds and RTP",
+    "rulesChanceFormula": "Win chance = 99 ÷ target, in percent. Example: target 2.00× → 49.50% chance → pays 2× (profit = stake × 1).",
+    "rulesRtpLine": "Theoretical RTP before payout rounding: 99% (1% house edge).",
+    "rulesCapLine": "The result can reach {cap}×; targets above it cannot be entered.",
+    "rulesLimitsH": "Limits",
+    "rulesBetRange": "Bet from {min} to {max} per round.",
+    "rulesMaxWin": "A round pays at most {cap}. A bet whose win would exceed the cap is refused — not reduced — and the maximum bet for the current multiplier is shown under the amount.",
+    "rulesAutoH": "Auto, Advanced and Instant",
+    "rulesAutoLine": "Auto places a run of bets at your stake, with optional on-win and on-loss increases and stop-on-profit / stop-on-loss limits. Advanced lets a strategy decide each next bet from the last round. Instant runs up to {max} bets back to back and draws a profit line as each one settles. Every stop is checked after each settled bet.",
+    "rulesFairH": "Provably fair",
+    "rulesFairLine": "Every result is derived from the server seed (its hash is published before the round), your client seed and the nonce. The derivation matches the public Limbo calculators — see the Provably Fair window to verify any round or try your own seeds.",
+    "rulesOpenFair": "Open Provably Fair",
+    "rulesMaxBet": "Max bet",
+    "rulesMinBet": "Min bet"
+  },
+  "changedSinceE02": {
+    "rulesRtpLine": {
+      "E02 (10 Oct)": "RTP is 99% at every target; the house edge is 1%.",
+      "E07 (19 Oct)": "Theoretical RTP before payout rounding: 99% (1% house edge)."
+    },
+    "rulesMaxBet": {
+      "E02 (10 Oct)": null,
+      "E07 (19 Oct)": "Max bet"
+    },
+    "rulesMinBet": {
+      "E02 (10 Oct)": null,
+      "E07 (19 Oct)": "Min bet"
+    }
+  },
+  "panelKeysCalled": {
+    "note": "rules keys the page code passes to its translator, (\"rulesX\" ...), in the 10 Oct copy vs the live copy",
+    "added": [
+      "rulesMaxBet",
+      "rulesMinBet"
+    ],
+    "removed": [
+      "rulesBetRange"
+    ]
+  }
+}

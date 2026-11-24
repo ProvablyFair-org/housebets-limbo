@@ -1,0 +1,18 @@
+# The audit account's HouseBets user id is replaced by the string "redacted" in every data file this package ships.
+# Field: bets[]._raw.game.userId, one per bet. The three other userId fields of each answer hold the nil UUID
+# 00000000-0000-0000-0000-000000000000 and are unchanged. No check of this package uses the user id.
+# Method: scripts/redact-user-id.mjs, a text substitution of the quoted value (no re-serialisation; every other byte is
+# unchanged; the result still round-trips through the capture rig's JSON.stringify(obj, null, 2)).
+# The as-captured files are NOT shipped: they stay in the HouseBets workshop (capture-full-2026-10-12/), sha256 below.
+# Anyone holding them reproduces the shipped bytes with: node scripts/redact-user-id.mjs <as-captured> <out>
+#
+# shipped file | as-captured file (workshop) | as-captured sha256 | shipped sha256 | values replaced
+captured/housebets-limbo-sp1-6480bets.redacted.json | phaseA/housebets-limbo-sp1-6480bets.json | b5df4f8f9e2058f7cd052857e7ef88d6e3b3537efa9833a15b16d2f73ccb5a53 | 88acb2f0213655a9aa33dd96c789b9ad3b16bc5cec9f87352a302badf0ff0a4d | 6480
+supplementary/housebets-limbo-phaseC-250bets.json | phases/housebets-limbo-phaseC-250bets.json | e6aac668f2b648adcc84d1fd317a1b0d1d129739fd411544e31020cee08cf887 | b7a2278d0f1628faf2afed638e795dc4768c3af01a8c996b4c15f41261450582 | 250
+supplementary/housebets-limbo-phaseC-safe-10usd-200bets.json | phases-10usd/housebets-limbo-phaseC-safe-10usd-200bets.json | c96fd75d4d476080b735eb02ddf34dc405b125f14cd7be4958d563ce46a24e0f | 8c079aff19ed7932089096b9e4b907482104057020aa9c399945dc2757b15a8d | 200
+supplementary/housebets-limbo-phaseD-200bets.json | phases/housebets-limbo-phaseD-200bets.json | cf8d97e6f5961cad015828e934948b810c5d3dd20ea40cd0af69c3f6f50b2205 | 8b0559985f2f7259bb7348afaecbff3300111ee6bd5e3d58df8a84b5a98e594e | 200
+#
+# Phase A primary and tail: written by the split (src/split.ts) from the shipped captured file above; DICE/LIMBO/COINFLIP-05
+# re-runs that split and requires both files byte for byte.
+housebets-limbo-phaseA-6450bets.json | split of housebets-limbo-sp1-6480bets.redacted.json | - | b18a02b7e1334d1f86c84248b5e25892b6e022f89804c1694ebe8ebb0afd803f | -
+housebets-limbo-phaseA-tail-30bets.json | split of housebets-limbo-sp1-6480bets.redacted.json | - | 50426eab9268df584394d62d564dfe095f34ec916227df40754e01cde121dd75 | -

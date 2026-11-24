@@ -1,0 +1,689 @@
+{
+  "about": "npm run mutate (scripts/mutate.mjs) over tests/mutations.json; a mutation is killed when its named check leaves the unmutated control copy's status",
+  "registrySha256": "0d1e275753422eb8015c7f5211b5db714d2f94e445a3f4b78da48498da48da1f",
+  "sourcesSha256": "8e48db94258a54aff663c84abf7878eacdb82a4cfe6a1a8146d1b2a5e0cfb888",
+  "scriptSha256": "e2e941817e537fc41c624036c028e05214ba24ee4582e898204c15a818c431db",
+  "node": "22.23.1",
+  "total": 66,
+  "killed": 66,
+  "survivors": [],
+  "uncoveredSteps": [],
+  "control": {
+    "ok": true,
+    "exit": 0,
+    "mismatches": []
+  },
+  "results": [
+    {
+      "id": "M01",
+      "kills": "LIMBO-01",
+      "what": "swap a revealed seed for another (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M02a",
+      "kills": "LIMBO-02",
+      "what": "break one forward link in Phase A (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M02b",
+      "kills": "LIMBO-02",
+      "what": "break the tail's link to the pair active after the capture (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M02c",
+      "kills": "LIMBO-02",
+      "what": "a Phase C chain with no pre-capture anchor (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M03",
+      "kills": "LIMBO-03",
+      "what": "one bet answered under another hash (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M04",
+      "kills": "LIMBO-04",
+      "what": "repeat a nonce in an epoch (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M05a",
+      "kills": "LIMBO-05",
+      "what": "drop one bet from a whole epoch (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M05b",
+      "kills": "LIMBO-05",
+      "what": "drop one bet from the tail file (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M05c",
+      "kills": "LIMBO-05",
+      "what": "a population constant that agrees with a shrunk tail",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M06a",
+      "kills": "LIMBO-06",
+      "what": "a Phase D epoch whose seed is not the player-set one (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M06b",
+      "kills": "LIMBO-06",
+      "what": "derivation that ignores the client seed",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M07",
+      "kills": "LIMBO-07",
+      "what": "one served result moved by 0.01 (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M08",
+      "kills": "LIMBO-08",
+      "what": "a result map scaled by 1.0001 (biased win probability)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M09",
+      "kills": "LIMBO-09",
+      "what": "a published vector misquoted in E01 itself (result 1.38 -> 1.39, re-pinned); LIMBO-09 reads the vectors from E01 at run time",
+      "status": "GAP",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M10",
+      "kills": "LIMBO-10",
+      "what": "win rule made strict (a tie loses), against the published text",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M11",
+      "kills": "LIMBO-11",
+      "what": "a payout forged up by 1e-8 in the bet and its server record (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M12a",
+      "kills": "LIMBO-12",
+      "what": "an elevated stake that is not the declared one (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M12b",
+      "kills": "LIMBO-12",
+      "what": "a $10-set bet at another target (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M13a",
+      "kills": "LIMBO-13",
+      "what": "a served multiplier off by 1e-8 (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M13b",
+      "kills": "LIMBO-13",
+      "what": "the operator's win-chance field forged (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M14",
+      "kills": "LIMBO-14",
+      "what": "a target above the 1,000,000x cap accepted (re-pinned)",
+      "status": "FLAG",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M16",
+      "kills": "LIMBO-16",
+      "what": "a bet-history row that disagrees with the bet (re-pinned)",
+      "status": "FLAG",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M17",
+      "kills": "LIMBO-17",
+      "what": "a tie settled as a loss (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M18",
+      "kills": "LIMBO-18",
+      "what": "a winning-draw count off by one",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M19e",
+      "kills": "LIMBO-19",
+      "what": "the published figure raised in the exhibit itself (E02 rulesRtpLine 99% -> 99.5%, re-pinned), the RTP table and the verification record regenerated and re-pinned: RTP FIGURE OVERSTATED, exit 5",
+      "status": "OVERSTATED",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "RTP FIGURE OVERSTATED",
+      "exit": 5,
+      "expectExit": 5
+    },
+    {
+      "id": "M19en",
+      "kills": "LIMBO-19",
+      "what": "the same E02 raise WITHOUT regenerating the RTP table: the committed table no longer equals the run, a reproduction failure, exit 1",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1,
+      "expectExit": 1
+    },
+    {
+      "id": "M19f",
+      "kills": "LIMBO-19",
+      "what": "the published figure raised in the live rules text (E07 rulesRtpLine 99% -> 99.5%, re-pinned), the RTP table and the verification record regenerated and re-pinned: RTP FIGURE OVERSTATED, exit 5",
+      "status": "OVERSTATED",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "RTP FIGURE OVERSTATED",
+      "exit": 5,
+      "expectExit": 5
+    },
+    {
+      "id": "M19g",
+      "kills": "LIMBO-19",
+      "what": "the figure raised at the other place it is stated, the game settings (E01 houseEdge 0.01 -> 0.005, re-pinned), table and record regenerated and re-pinned: exit 5",
+      "status": "OVERSTATED",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "RTP FIGURE OVERSTATED",
+      "exit": 5,
+      "expectExit": 5
+    },
+    {
+      "id": "M19c",
+      "kills": "LIMBO-19",
+      "what": "the payout rule pays 1.31x at target 1.32 (no captured bet and no simulation band at 1.32), one setting misses; table and record regenerated and re-pinned: exit 5",
+      "status": "OVERSTATED",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "RTP FIGURE OVERSTATED",
+      "exit": 5,
+      "expectExit": 5
+    },
+    {
+      "id": "M19cn",
+      "kills": "LIMBO-19",
+      "what": "the same lowered cell WITHOUT regenerating the RTP table: reproduction failure, exit 1",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1,
+      "expectExit": 1
+    },
+    {
+      "id": "M20a",
+      "kills": "LIMBO-20",
+      "what": "a forged census bin (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M20b",
+      "kills": "LIMBO-20",
+      "what": "a cheaper Pass 1 (100 seeds) regenerated and re-pinned",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M20e",
+      "kills": "LIMBO-20",
+      "what": "a cheaper long run at 2.00× (200 seeds, 2,000,000 bets instead of 20,000,000) regenerated and re-pinned",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M20f",
+      "kills": "LIMBO-20",
+      "what": "a cheaper edge table (100 seeds, 1,000,000 bets per target instead of 2,000,000) regenerated and re-pinned",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M20g",
+      "kills": "LIMBO-20",
+      "what": "cheaper 1,000,000-bet targets (500,000 bets per target) regenerated and re-pinned",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M21a",
+      "kills": "LIMBO-21",
+      "what": "a Pass 2 early window that is not the captured depth (40 of 50 nonces), regenerated and re-pinned",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M21b",
+      "kills": "LIMBO-21",
+      "what": "a forged Pass 2 epoch return (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M21c",
+      "kills": "LIMBO-21",
+      "what": "Pass 2 narrowed back to the Phase A seeds (the tail, C, the $10 set and D left out), regenerated and re-pinned",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M26",
+      "kills": "LIMBO-26",
+      "what": "a dataset byte changed, not re-pinned",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M26u",
+      "kills": "LIMBO-26",
+      "what": "a user id that is not redacted, re-pinned",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M27",
+      "kills": "LIMBO-27",
+      "what": "a committed RTP table edited and re-pinned",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M31",
+      "kills": "LIMBO-31",
+      "what": "a scaling-edge block in the published spec (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M15r",
+      "kills": "LIMBO-15",
+      "what": "a planned target the server refused with a non-transient answer (one transient refusal relabelled in meta.rejected, re-pinned): operator-origin, not a capture gap",
+      "status": "FLAG",
+      "baseline": "FLAG*",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M07t",
+      "kills": "LIMBO-07",
+      "what": "a tail result moved 3.23 -> 3.22 (target 100, still a loss), in the copy and the server answer (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M11t",
+      "kills": "LIMBO-11",
+      "what": "a tail payout +1e-8 in the bet, its round record and the server answer (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M07g",
+      "kills": "LIMBO-07",
+      "what": "a losing result given a 3rd decimal (15.98 -> 15.984) in the copy and the server answer (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M11g",
+      "kills": "LIMBO-11",
+      "what": "a payout given a 9th decimal (0.04361355 -> 0.043613554) in the bet, its round record and the server answer (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M07n",
+      "kills": "LIMBO-07",
+      "what": "the server answer nonce forged, the copy left intact (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M07c",
+      "kills": "LIMBO-07",
+      "what": "the server answer client seed forged, the copy left intact (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M11s",
+      "kills": "LIMBO-11",
+      "what": "the server answer payout forged +1e-8, the copy and round record left intact (re-pinned)",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M16a",
+      "kills": "LIMBO-16",
+      "what": "E05 ledger line with an impossible entry count (99999 != 86966 + 0 + 13) (re-pinned)",
+      "status": "FLAG",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M16b",
+      "kills": "LIMBO-16",
+      "what": "E05 balance before changed to 123.45678900 (re-pinned)",
+      "status": "FLAG",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M16c",
+      "kills": "LIMBO-16",
+      "what": "E05 limbo Phase C row paid +1e-6 with net, TOTAL and the wallet after moved to stay arithmetically consistent (re-pinned); only the package-computed sums can catch it",
+      "status": "FLAG",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M07e",
+      "kills": "LIMBO-07",
+      "what": "the game page's result function in E02 changed (the result scaled by 0.999), re-pinned: the page's own function no longer gives the served results",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M07d",
+      "kills": "LIMBO-07",
+      "what": "the LIMBO-07 step deleted from the verifier (its record() call removed)",
+      "status": "NOT_RUN",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M07p",
+      "kills": "LIMBO-07",
+      "what": "LIMBO-07 deleted from the verifier AND its row from src/profile-map.ts, the verification record regenerated and re-pinned: INCOMPLETE, exit 3",
+      "status": "NOT_RUN",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "INCOMPLETE — steps not run",
+      "exit": 3,
+      "expectExit": 3
+    },
+    {
+      "id": "M07i",
+      "kills": "LIMBO-07",
+      "what": "LIMBO-07 relabelled INFORMATIONAL in src/profile-map.ts and a served result forged +0.01 (re-pinned): exit 3 or 1, never 0",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1,
+      "expectExit": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": "M26p",
+      "kills": "LIMBO-26",
+      "what": "the vendored framework profile edited (LIMBO-07 removed) and re-pinned in src/ and RELEASE-MANIFEST.json; the verifier's own pin still differs",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M26e",
+      "kills": "LIMBO-26",
+      "what": "E03 wallet.maxWin changed to 5 (re-pinned); the src/spec.ts copy no longer equals the exhibit",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M26v",
+      "kills": "LIMBO-26",
+      "what": "the src/spec.ts copy of a published vector misquoted (resultH 138 -> 139); it no longer equals E01",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M23",
+      "kills": "LIMBO-23",
+      "what": "an S5 row renamed in MANIFEST.md (S5-1 'Replay protection' -> 'Seed substitution', the old row name of this package)",
+      "status": "GAP",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M01n",
+      "kills": "LIMBO-01",
+      "what": "every revealed server seed in Phase A set to null (re-pinned): the hash check scores FAIL and every row still prints",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M05s",
+      "kills": "LIMBO-05",
+      "what": "Phase A cut to its first 80 % (bets 6450 -> 5160), every count in the file that read 6450 made to agree (re-pinned): the population check scores FAIL and every row still prints",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M20d",
+      "kills": "LIMBO-20",
+      "what": "outputs/simulation-results.json deleted: Pass 1 has no census to equal, scores FAIL, and every row still prints",
+      "status": "FAIL",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M24a",
+      "kills": "LIMBO-24",
+      "what": "site-verifier/derive.js: the 0.99 factor dropped from the result formula inside the module (results 1 % higher), the file re-pinned in src/artifact-pins.ts and RELEASE-MANIFEST.json and its sha256 replaced in MANIFEST.md and README.md: every pin and quoted hash agrees, and the side-by-side run with src/rng.ts on the captured bets catches it",
+      "status": "GAP",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    },
+    {
+      "id": "M24b",
+      "kills": "LIMBO-24",
+      "what": "the pin of site-verifier/derive.js in src/artifact-pins.ts (SITE_VERIFIER_PIN) no longer the sha256 of the shipped module, the module itself untouched",
+      "status": "GAP",
+      "baseline": "PASS",
+      "killed": true,
+      "verdict": "NOT PROVABLY FAIR",
+      "exit": 1
+    }
+  ]
+}
